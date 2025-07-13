@@ -14,17 +14,21 @@ import { dummyShowsData } from "../lib/assets";
 
 const FeatureSection = () => {
   return (
+
     <div className="w-full p-10">
       <div className="flex justify-between py-5 items-center">
-        <h2 className="font-semibold text-xl">Now Showing</h2>
-        <h2 className="font-semibold text-sm flex items-center gap-1">
+        <h2 className="font-semibold text-xl opacity-70">Now Showing</h2>
+        <h2 className="font-semibold text-sm flex items-center gap-1 opacity-70">
           View All <ArrowRight />
         </h2>
       </div>
       <div className="flex gap-10 py-10 flex-wrap w-fit mx-auto p-10">
         {dummyShowsData.map((item, idx) => {
           return (
-            <Card className="w-72" key={idx}>
+            <Card
+              className="w-72 hover:scale-105 transition-all duration-300 cursor-pointer"
+              key={idx}
+            >
               <CardHeader>
                 <img
                   className="w-full aspect-square object-cover rounded-md"
@@ -43,15 +47,21 @@ const FeatureSection = () => {
                   <span className="opacity-80 text-sm">
                     {item.release_date.split("-")[0]}
                   </span>
-                  |{' '}
-                  <span className="opacity-80 text-sm">{item.genres[0].name}</span>
-                  |{' '}<span className="opacity-80 text-sm">{item.runtime} min</span>
-                  |{' '}<span className="opacity-80 text-sm">{item.original_language.toUpperCase()}</span>
+                  |{" "}
+                  <span className="opacity-80 text-sm">
+                    {item.genres[0].name}
+                  </span>
+                  |{" "}
+                  <span className="opacity-80 text-sm">{item.runtime} min</span>
+                  |{" "}
+                  <span className="opacity-80 text-sm">
+                    {item.original_language.toUpperCase()}
+                  </span>
                 </p>
               </CardContent>
               <CardFooter>
                 <div className="flex items-center justify-between w-full">
-                  <Button className="bg-pink-600 text-white rounded-full">
+                  <Button className="bg-pink-600 text-white hover:bg-pink-700 rounded-full">
                     Buy Ticktes
                   </Button>
                   <div className="flex items-center gap-2">
@@ -63,6 +73,12 @@ const FeatureSection = () => {
             </Card>
           );
         })}
+      
+      </div>
+      <div className="flex justify-center">
+      <Button className="bg-pink-600 text-white hover:bg-pink-700 rounded-md px-5 py-2 hover:animate-pulse cursor-pointer">
+         Show More
+        </Button>
       </div>
     </div>
   );
