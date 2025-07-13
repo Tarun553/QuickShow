@@ -2,7 +2,7 @@ import React from 'react'
 import { Calendar, Clock } from 'lucide-react'
 const HeroSection = () => {
   return (
-    <div className='flex justify-center items-center h-screen w-full'>
+    <div className='relative flex justify-center items-center h-screen w-full'>
     <img src="./backgroundImage.png" alt="" className='w-full h-full object-cover' />
     <div className='px-20 space-y-5 absolute inset-0 w-full h-full z-10 flex flex-col justify-center items-start'>
       <img src="./marvelLogo.svg" alt="" />

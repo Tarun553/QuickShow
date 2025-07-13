@@ -1,0 +1,71 @@
+import { ArrowRight, Star } from "lucide-react";
+import React from "react";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "./ui/button";
+import { dummyShowsData } from "../lib/assets";
+
+const FeatureSection = () => {
+  return (
+    <div className="w-full p-10">
+      <div className="flex justify-between py-5 items-center">
+        <h2 className="font-semibold text-xl">Now Showing</h2>
+        <h2 className="font-semibold text-sm flex items-center gap-1">
+          View All <ArrowRight />
+        </h2>
+      </div>
+      <div className="flex gap-10 py-10 flex-wrap w-fit mx-auto p-10">
+        {dummyShowsData.map((item, idx) => {
+          return (
+            <Card className="w-72" key={idx}>
+              <CardHeader>
+                <img
+                  className="w-full aspect-square object-cover rounded-md"
+                  src={item.poster_path}
+                  alt=""
+                />
+              </CardHeader>
+              <CardContent className="space-y-1">
+                <h3 className="text-lg font-bold">{item.title}</h3>
+                <p className=" opacity-80 text-sm">
+                  {item.overview.length > 50
+                    ? item.overview.slice(0, 50) + "..."
+                    : item.overview}
+                </p>
+                <p className="opacity-80 text-sm space-x-1.5">
+                  <span className="opacity-80 text-sm">
+                    {item.release_date.split("-")[0]}
+                  </span>
+                  |{' '}
+                  <span className="opacity-80 text-sm">{item.genres[0].name}</span>
+                  |{' '}<span className="opacity-80 text-sm">{item.runtime} min</span>
+                  |{' '}<span className="opacity-80 text-sm">{item.original_language.toUpperCase()}</span>
+                </p>
+              </CardContent>
+              <CardFooter>
+                <div className="flex items-center justify-between w-full">
+                  <Button className="bg-pink-600 text-white rounded-full">
+                    Buy Ticktes
+                  </Button>
+                  <div className="flex items-center gap-2">
+                    {" "}
+                    <Star /> <span>{item.vote_average}</span>
+                  </div>
+                </div>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default FeatureSection;
