@@ -17,8 +17,8 @@ const FeatureSection = () => {
   const navigate = useNavigate()
   return (
 
-    <div className="w-full p-10">
-      <div className="flex justify-between py-5 items-center">
+    <div className="w-full p-20">
+      <div className="flex justify-between py-10 items-center">
         <h2 className="font-semibold text-xl opacity-70">Now Showing</h2>
         <h2 className="font-semibold text-sm flex items-center gap-1 opacity-70">
           View All <ArrowRight />
@@ -27,7 +27,7 @@ const FeatureSection = () => {
       <div className="flex gap-10 py-10 flex-wrap w-fit mx-auto p-10">
         {dummyShowsData.map((item, idx) => {
           return (
-            <Card
+            <Card onClick={() => navigate(`/movies/${item.id}`)}
               className="w-72 hover:scale-105 transition-all duration-300 cursor-pointer"
               key={idx}
             >
@@ -63,7 +63,7 @@ const FeatureSection = () => {
               </CardContent>
               <CardFooter>
                 <div className="flex items-center justify-between w-full">
-                  <Button onClick={() => navigate("/movies")} className="bg-pink-600 text-white hover:bg-pink-700 rounded-full">
+                  <Button onClick={() => navigate(`/movies/${item.id}`)} className="bg-pink-600 text-white hover:bg-pink-700 rounded-full">
                     Buy Ticktes
                   </Button>
                   <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const FeatureSection = () => {
         })}
       
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center py-10">
       <Button onClick={() => navigate("/movies")} className="bg-pink-600 text-white hover:bg-pink-700 rounded-md px-5 py-2 hover:animate-pulse cursor-pointer">
          Show More
         </Button>

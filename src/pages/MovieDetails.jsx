@@ -1,8 +1,11 @@
 import React from 'react'
+import Details from '../components/Details'
 
 const MovieDetails = () => {
   return (
-    <div>MovieDetails</div>
+    <div>
+      <Details/>
+    </div>
   )
 }
 

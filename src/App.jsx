@@ -27,6 +27,7 @@ if (!PUBLISHABLE_KEY) {
     <ThemeContextProvider>
       <>
         {!isAdminRoute && <Navbar/>}
+        <Toaster/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/movies" element={<Movie/>}/>
