@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { dummyShowsData } from "../lib/assets";
+import { useNavigate } from "react-router-dom";
 
 const FeatureSection = () => {
+  const navigate = useNavigate()
   return (
 
     <div className="w-full p-10">
@@ -61,7 +63,7 @@ const FeatureSection = () => {
               </CardContent>
               <CardFooter>
                 <div className="flex items-center justify-between w-full">
-                  <Button className="bg-pink-600 text-white hover:bg-pink-700 rounded-full">
+                  <Button onClick={() => navigate("/movies")} className="bg-pink-600 text-white hover:bg-pink-700 rounded-full">
                     Buy Ticktes
                   </Button>
                   <div className="flex items-center gap-2">
@@ -76,7 +78,7 @@ const FeatureSection = () => {
       
       </div>
       <div className="flex justify-center">
-      <Button className="bg-pink-600 text-white hover:bg-pink-700 rounded-md px-5 py-2 hover:animate-pulse cursor-pointer">
+      <Button onClick={() => navigate("/movies")} className="bg-pink-600 text-white hover:bg-pink-700 rounded-md px-5 py-2 hover:animate-pulse cursor-pointer">
          Show More
         </Button>
       </div>

@@ -1,8 +1,11 @@
 import React from 'react'
+import FeatureSection from '../components/FeatureSection'
 
 const Movie = () => {
   return (
-    <div>Movie</div>
+    <div>
+      <FeatureSection/>
+    </div>
   )
 }
 
