@@ -1,12 +1,12 @@
 import {
   SearchIcon,
   Home,
-  Shield,
   Popcorn,
   Projector,
   CalendarHeart,
   Sun,
   Moon,
+  ChartNoAxesCombined,
   TicketIcon,
 } from "lucide-react";
 import React from "react";
@@ -32,9 +32,9 @@ const Navbar = () => {
     { title: "Home", icon: Home, path: "/" },
     { title: "Movies", icon: Popcorn, path: "/movies" },
     { type: "separator" },
-    { title: "Theaters", icon: Projector, path: "/theaters" },
-    { title: "Release", icon: CalendarHeart, path: "/release" },
-    { title: "Security", icon: Shield, path: "/security" },
+    { title: "Theaters", icon: Projector, path: "/movies" },
+    { title: "Release", icon: CalendarHeart, path: "/movies" },
+    { title: "Dashboard", icon: ChartNoAxesCombined, path: "/dashboard" },
   ];
   return (
     <nav

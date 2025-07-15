@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { dummyShowsData } from "../lib/assets";
-import {
-  Card,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Heart, Star, ChevronRight, ChevronLeft } from "lucide-react";
 import { Button } from "./ui/button";
 const Details = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  
   const { id } = useParams();
   const navigate = useNavigate();
   console.log(id);
@@ -18,7 +16,6 @@ const Details = () => {
     console.log("show not found");
     return <div>show not found</div>;
   }
- 
 
   return (
     <>
@@ -50,7 +47,10 @@ const Details = () => {
                 Watch trailer
               </Button>
             </div>
-            <Button onClick={() => navigate(`/movies/${show.id}`)} className="bg-[#F84565] hover:bg-[#F84565]/80 hover:opacity-100 opacity-80 text-white cursor-pointer">
+            <Button
+              onClick={() => navigate(`/movies/${show.id}`)}
+              className="bg-[#F84565] hover:bg-[#F84565]/80 hover:opacity-100 opacity-80 text-white cursor-pointer"
+            >
               Buy tickets
             </Button>
             <Heart className="cursor-pointer" />
@@ -59,13 +59,15 @@ const Details = () => {
       </div>
       {/* your favorite cast section */}
       <div className="px-10 pt-12 pb-6 w-full">
-        <h1 className="text-2xl font-bold mb-6 text-white/95">Your Favorite Cast</h1>
+        <h1 className="text-2xl font-bold mb-6 text-white/95">
+          Your Favorite Cast
+        </h1>
         <div className="flex items-end gap-8 overflow-x-auto scrollbar-hidden scrollbar-thumb-pink-400 scrollbar-track-transparent pb-2">
           {show.casts.map((item, idx) => (
             <div
               key={idx}
               className="flex flex-col items-center min-w-[110px]"
-              style={{ flex: '0 0 auto' }}
+              style={{ flex: "0 0 auto" }}
             >
               <img
                 className="w-24 h-24 object-cover rounded-full border-2 border-[#1E2939]  shadow-lg hover:scale-105 transition-transform duration-200 "
@@ -84,21 +86,59 @@ const Details = () => {
         <Card className="w-[95%] h-[20%] shadow-xl rounded-2xl">
           <div className="flex items-center justify-between w-full px-10">
             <div className="flex flex-col">
-              <h2 className="text-2xl font-bold mb-6 text-white/95">Choose Date</h2>
+              <h2 className="text-2xl font-bold mb-6 text-white/95">
+                Choose Date
+              </h2>
               <div className="flex items-center gap-4 mt-2">
-                <button onClick={() => {}} className="w-10 h-10 flex items-center justify-center rounded-lg border border-pink-500 text-pink-400 text-2xl hover:bg-pink-900/10 transition-all"><span>  <ChevronLeft className="w-6 h-6" /></span></button>
+                <button
+                  onClick={() => setSelectedDate(selectedDate - 1)}
+                  className="w-10 h-10 flex items-center justify-center rounded-lg border border-pink-500 text-pink-400 text-2xl hover:bg-pink-900/10 transition-all"
+                >
+                  <span>
+                    {" "}
+                    <ChevronLeft className="w-6 h-6" />
+                  </span>
+                </button>
                 {/* Example dates, replace with dynamic data if needed */}
-                {[13, 14, 11, 10, 12].map((day, idx) => (
-                  <div key={idx} className="flex flex-col items-center justify-center w-20 h-20 border border-pink-400 rounded-lg mx-1 bg-black/20 text-white hover:border-pink-500 hover:scale-105 transition-all cursor-pointer">
-                    <span className="text-md font-semibold mb-1">{day}</span>
-                    <span className="text-xs font-normal">Nov</span>
-                  </div>
-                ))}
-                <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-pink-500 text-pink-400 text-2xl hover:bg-pink-900/10 transition-all"><span>  <ChevronRight className="w-6 h-6" /></span></button>
+                {[13, 14, 11, 10, 12].map((day, idx) => {
+  const isSelected = selectedDate === day;
+  return (
+    <div
+      key={idx}
+      onClick={() => setSelectedDate(day)}
+      className={`flex flex-col items-center justify-center w-20 h-20 border rounded-lg mx-1 bg-black/20 text-white hover:border-pink-500 hover:scale-105 transition-all cursor-pointer ${
+        isSelected ? "border-pink-600 bg-pink-900/30" : "border-pink-400"
+      }`}
+    >
+      <span className="text-md font-semibold mb-1">{day}</span>
+      <span className="text-xs font-normal">Nov</span>
+    </div>
+  );
+})}
+                <button
+                  disabled={!selectedDate}
+                  onClick={() => setSelectedDate(selectedDate + 1)}
+                  className="w-10 h-10 flex items-center justify-center rounded-lg border border-pink-500 text-pink-400 text-2xl hover:bg-pink-900/10 transition-all"
+                >
+                  <span>
+                    {" "}
+                    <ChevronRight className="w-6 h-6" />
+                  </span>
+                </button>
               </div>
             </div>
             <div className="flex items-center">
-              <Button className="bg-[#F84565] hover:bg-[#F84565]/80 text-white px-10 py-3 text-lg font-semibold rounded-md shadow-lg">Book Now</Button>
+              <Button
+                className="bg-[#F84565] hover:bg-[#F84565]/80 text-white px-10 py-3 text-lg font-semibold rounded-md shadow-lg"
+                disabled={!selectedDate}
+                onClick={() => {
+                  if (selectedDate) {
+                    navigate(`/movies/${show.id}/${selectedDate}`);
+                  }
+                }}
+              >
+                Book Now
+              </Button>
             </div>
           </div>
         </Card>
@@ -106,14 +146,16 @@ const Details = () => {
 
       {/* similar movies section */}
       <div className="w-full flex flex-col items-center justify-center mt-10">
-        <h1 className="text-2xl font-bold mb-6 text-white/95">Similar Movies</h1>
+        <h1 className="text-2xl font-bold mb-6 text-white/95">
+          Similar Movies
+        </h1>
         <div className="flex items-center gap-8 overflow-x-auto scrollbar-hidden scrollbar-thumb-pink-400 scrollbar-track-transparent pb-2">
           {dummyShowsData.map((item, idx) => (
             <div
-            onClick={() => navigate(`/movies/${item.id}`)}
+              onClick={() => navigate(`/movies/${item.id}`)}
               key={idx}
               className="flex flex-col cursor-pointer items-center min-w-[110px]"
-              style={{ flex: '0 0 auto' }}
+              style={{ flex: "0 0 auto" }}
             >
               <img
                 className="w-24 h-24 object-cover rounded-full border-2 border-[#1E2939]  shadow-lg hover:scale-105 transition-transform duration-200 "
