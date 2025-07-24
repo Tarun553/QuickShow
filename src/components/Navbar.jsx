@@ -4,8 +4,6 @@ import {
   Popcorn,
   Projector,
   CalendarHeart,
-  Sun,
-  Moon,
   ChartNoAxesCombined,
   TicketIcon,
 } from "lucide-react";
@@ -13,7 +11,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ExpandableTabs } from "./ui/expandable-tabs";
 import { Button } from "./ui/button";
-import { useTheme } from "../context/useTheme";
+import ThemeToggleButton from "./ui/theme-toggle-button";
+
 import {
   SignedIn,
   SignedOut,
@@ -22,11 +21,10 @@ import {
 } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
-const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
-  const navigate = useNavigate();
 
-  const {isSignedIn} = useUser();
+const Navbar = () => {
+  const navigate = useNavigate();
+  const { isSignedIn } = useUser();
 
   const tabs = [
     { title: "Home", icon: Home, path: "/" },
@@ -36,19 +34,16 @@ const Navbar = () => {
     { title: "Release", icon: CalendarHeart, path: "/movies" },
     { title: "Dashboard", icon: ChartNoAxesCombined, path: "/dashboard" },
   ];
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl dark:bg-black/10 dark:backdrop-blur-xl shadow dark:shadow-md ${
-        theme === "light" ? "light:bg-white" : "dark:bg-black"
-      }`}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-xl dark:bg-black/10 dark:backdrop-blur-xl shadow dark:shadow-md">
       <div className="container mx-auto px-4 py-5">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img
-              className={`${theme === "light" ? "filter invert" : ""}`}
+              className="light:hue-rotate-180"
               src="./logo.svg"
-              alt=""
+              alt="QuickShow Logo"
             />
           </Link>
 
@@ -56,34 +51,25 @@ const Navbar = () => {
             <ExpandableTabs tabs={tabs} />
           </div>
 
-          <div className="flex items-center gap-6">
-            <SearchIcon className="h-5 w-5 text-gray-600 hover:text-gray-800 transition-colors" />
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors dark:hover:bg-gray-800"
-              aria-label={
-                theme === "light"
-                  ? "Switch to dark mode"
-                  : "Switch to light mode"
-              }
-            >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5 text-gray-600 dark:text-white" />
-              ) : (
-                <Sun className="h-5 w-5 text-gray-600 dark:text-white" />
-              )}
-            </button>
+          <div className="flex items-center gap-4">
+            <SearchIcon className="h-5 w-5 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white transition-colors cursor-pointer" />
+
+            <ThemeToggleButton
+             
+            
+            />
+
             {isSignedIn ? (
               <SignedIn>
-              <UserButton>
-  <UserButton.MenuItems>
-    <UserButton.Action
-      label="my bookings"
-      labelIcon={<TicketIcon className="h-5 w-5" />}
-      onClick={() => navigate("/myBooking")}
-    />
-  </UserButton.MenuItems>
-</UserButton>
+                <UserButton>
+                  <UserButton.MenuItems>
+                    <UserButton.Action
+                      label="My Bookings"
+                      labelIcon={<TicketIcon className="h-5 w-5" />}
+                      onClick={() => navigate("/myBooking")}
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
               </SignedIn>
             ) : (
               <SignedOut>

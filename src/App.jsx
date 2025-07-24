@@ -10,7 +10,8 @@ import MyBooking from './pages/MyBooking'
 import Favorite from './pages/Favorite'  
 import Footer from './components/Footer'
 import { Toaster } from 'react-hot-toast'
-import { ThemeContextProvider } from './context/ThemeContext'
+// import { ThemeContextProvider } from './context/ThemeContext'
+import { ThemeProvider } from './components/ui/theme-provider'
 import { ClerkProvider } from '@clerk/clerk-react'
 
 const App = () => {
@@ -24,7 +25,11 @@ if (!PUBLISHABLE_KEY) {
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
 
-    <ThemeContextProvider>
+    <ThemeProvider
+     attribute="class"
+     defaultTheme="system"
+     enableSystem
+    >
       <>
         {!isAdminRoute && <Navbar/>}
         <Toaster/>
@@ -38,7 +43,7 @@ if (!PUBLISHABLE_KEY) {
         </Routes>
         {!isAdminRoute && <Footer/>}
       </>
-    </ThemeContextProvider>
+    </ThemeProvider>
     </ClerkProvider>
   )
 }

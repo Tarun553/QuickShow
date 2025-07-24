@@ -136,6 +136,7 @@ const MyBooking = () => {
                           </div>
                           
                           <div className="flex items-start">
+                            
                             <Ticket className="h-5 w-5 text-gray-400 mr-2 mt-0.5 flex-shrink-0" />
                             <div>
                               <div className="font-medium">Seats</div>
