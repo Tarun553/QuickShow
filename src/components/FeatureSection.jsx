@@ -1,7 +1,7 @@
 import { ArrowRight, Star } from "lucide-react";
 import { GlowingEffect } from "./ui/glowing-effect";
 import { MovingBorderButton } from "@/components/ui/moving-border";
-
+import { Link } from "react-router-dom";
 import React from "react";
 import {
   Card,
@@ -92,15 +92,10 @@ const FeatureSection = () => {
         })}
       </div>
       <div className="flex justify-center py-10">
-      <MovingBorderButton
-
-  onClick={() => navigate("/movies")}
-  className="h-8 w-8 rounded-full bg-indigo-900 blur-xl opacity-60"
->
-  Show More
-</MovingBorderButton>
-
-
+       <Link to={"/movies"}>
+        <MovingBorderButton  className="">Show More</MovingBorderButton>
+       </Link>
+       
       </div>
     </div>
   );

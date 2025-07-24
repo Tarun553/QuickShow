@@ -15,12 +15,12 @@ export function MovingBorderButton({
 }) {
   return (
     <button
-      className="relative overflow-hidden p-[2px] w-60 h-20"
+      className="relative overflow-hidden p-[2px] w-30 h-15"
       style={{ borderRadius }}
     >
       <div className="absolute inset-0">
         <MovingBorder duration={duration} rx="20" ry="20">
-          <div className="h-8 w-8 rounded-full bg-sky-400 blur-2xl opacity-80" />
+          <div className="h-16 w-16 rounded-md bg-sky-500 blur-xl opacity-100" />
         </MovingBorder>
       </div>
       <div

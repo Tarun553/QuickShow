@@ -119,7 +119,8 @@ const SeatLayout = () => {
           <Button
             disabled={isProceedDisabled}
             onClick={() =>
-              navigate(`/movies/${id}/${date}/${selectedTiming}`)
+              // stripe intregation
+              navigate(`/movies/${id}/${date}/${selectedTiming}`)    
             }
             className={`bg-[#F84565] text-white cursor-pointer ${
               isProceedDisabled
